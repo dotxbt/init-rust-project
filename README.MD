@@ -8,7 +8,7 @@
   ```
 - to install dependency project
   ```bash
-  cargo install <package_name>
+  cargo install package-name
   ```
 - to generate module tree
   ```bash
