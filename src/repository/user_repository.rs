@@ -1,17 +1,17 @@
 use crate::model::user;
 
-pub struct UserRepoModel {
+pub struct UserRepository {
     data: Vec<user::User>,
 }
 
-trait UserRepository {
+trait UserRepositoryAbstract {
     fn add_user(&mut self, user: user::User);
     fn update_user(&mut self, index: usize, user: user::User);
     fn get_users(self) -> Vec<user::User>;
     fn delete_user(&mut self, index: usize);
 }
 
-impl UserRepository for UserRepoModel {
+impl UserRepositoryAbstract for UserRepository {
     fn add_user(&mut self, user: user::User) {
         self.data.push(user);
     }
@@ -29,7 +29,7 @@ impl UserRepository for UserRepoModel {
 }
 
 pub fn try_user_repo() {
-    let mut repo = UserRepoModel { data: vec![] };
+    let mut repo = UserRepository { data: vec![] };
     for i in 0..=5 {
         repo.add_user(user::User {
             id: i,

@@ -2,7 +2,7 @@ pub mod util;
 pub mod model;
 pub mod repository;
 
-use repository::userrepo;
+use repository::user_repository;
 fn main() {
-    userrepo::try_user_repo();
+    user_repository::try_user_repo();
 }
