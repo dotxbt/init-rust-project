@@ -1,6 +1,8 @@
 pub mod util;
-use util::random;
+pub mod model;
+pub mod repository;
 
+use repository::userrepo;
 fn main() {
-    random::guest_number();
+    userrepo::try_user_repo();
 }
