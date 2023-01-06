@@ -4,14 +4,14 @@ pub struct UserRepository {
     data: Vec<user::User>,
 }
 
-trait UserRepositoryAbstract {
+trait UserRepositoryInterface {
     fn add_user(&mut self, user: user::User);
     fn update_user(&mut self, index: usize, user: user::User);
     fn get_users(self) -> Vec<user::User>;
     fn delete_user(&mut self, index: usize);
 }
 
-impl UserRepositoryAbstract for UserRepository {
+impl UserRepositoryInterface for UserRepository {
     fn add_user(&mut self, user: user::User) {
         self.data.push(user);
     }
