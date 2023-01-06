@@ -1,44 +1,37 @@
-use crate::model::user;
+pub trait DataRepositoryInterface<T> {
+    fn add_item(&mut self, item: T);
+    fn get_item(&mut self, index: usize) -> &T;
+    fn update_item(&mut self, index: usize, item: T);
+    fn delete_item(&mut self, index: usize);
+}
+
+#[derive(Debug)]
+pub struct User {
+    pub id: i32,
+    pub full_name: String,
+    pub email: String,
+    pub password: String,
+}
 
 pub struct UserRepository {
-    data: Vec<user::User>,
+    pub(crate) data: Vec<User>,
 }
 
-trait UserRepositoryInterface {
-    fn add_user(&mut self, user: user::User);
-    fn update_user(&mut self, index: usize, user: user::User);
-    fn get_users(self) -> Vec<user::User>;
-    fn delete_user(&mut self, index: usize);
-}
-
-impl UserRepositoryInterface for UserRepository {
-    fn add_user(&mut self, user: user::User) {
-        self.data.push(user);
+impl DataRepositoryInterface<User> for UserRepository {
+    fn add_item(&mut self, item: User) {
+        self.data.push(item);
     }
 
-    fn update_user(&mut self, index: usize, user: user::User) {
-        self.data[index] = user;
-    }
-    fn get_users(self) -> Vec<user::User> {
-        return self.data;
+    fn get_item(&mut self, index: usize) -> &User {
+        return self.data.get(index).unwrap();
     }
 
-    fn delete_user(&mut self, index: usize) {
+    fn update_item(&mut self, index: usize, item: User) {
+        self.data[index] = item;
+    }
+
+    fn delete_item(&mut self, index: usize) {
         self.data.remove(index);
     }
 }
 
-pub fn try_user_repo() {
-    let mut repo = UserRepository { data: vec![] };
-    for i in 0..=5 {
-        repo.add_user(user::User {
-            id: i,
-            full_name: "Sabituddin Bibgbang".to_string(),
-            email: "sabituddin@gmail.com".to_string(),
-            password: "Hell0C00kz".to_string(),
-        });
-    }
-    println!("ADD USER : {:?}", repo.data);
-    repo.delete_user(0);
-    println!("\n\nDELETE USER : {:?}", repo.data);
-}
